@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    line-height: 1.6;
+  }
+}
+
+/* Tło sekcji hero — siatka punktów jak na makiecie (docs/projekt-graficzny-wytyczne.jpg) */
+.hero-grid {
+  background-color: #0b1220;
+  background-image:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(14, 165, 233, 0.12), transparent 70%),
+    radial-gradient(circle, rgba(148, 163, 184, 0.25) 1px, transparent 1px);
+  background-size: 100% 100%, 26px 26px;
+  background-position: center top, center;
+}

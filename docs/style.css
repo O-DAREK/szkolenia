@@ -1,0 +1,299 @@
+/* Definicja podstawowych kolorów (Zmienne CSS) */
+:root {
+    --bg-dark: #0f141e; /* Główny kolor tła strony */
+    --card-bg: #151f2e; /* Tło kart kursów */
+    --accent-color: #0ea5e9; /* Turkusowy kolor akcentów */
+    --text-main: #e2e8f0; /* Główny, jasny kolor tekstu */
+    --text-muted: #94a3b8; /* Przygaszony kolor tekstu dla opisów */
+}
+
+/* Resetowanie domyślnych marginesów przeglądarki */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+/* --- NAWIGACJA --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: rgba(15, 20, 30, 0.95);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.logo {
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo strong {
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+}
+
+.logo-subtitle {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+.nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--accent-color);
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+/* --- PRZYCISKI --- */
+.btn {
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    color: #fff;
+    border: 1px solid var(--accent-color);
+}
+
+.btn-primary:hover {
+    background-color: #0284c7;
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--text-main);
+    border: 1px solid var(--text-muted);
+}
+
+.btn-outline:hover {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
+
+/* --- SEKCJA HERO --- */
+.hero {
+    text-align: center;
+    padding: 80px 20px 60px;
+    position: relative;
+}
+
+.hero h1 {
+    color: var(--accent-color);
+    font-size: 2.2rem;
+    letter-spacing: 1.5px;
+    line-height: 1.4;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+/* --- KARTY KURSÓW (CSS GRID) --- */
+.courses {
+    padding: 20px 40px 80px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.courses-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.course-card {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    padding: 30px 25px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-color);
+}
+
+.course-card .icon {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.course-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    text-align: center;
+    height: 45px; /* Ujednolicenie wysokości nagłówków */
+}
+
+.course-card .desc {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    flex-grow: 1; /* Pozwala karcie równomiernie rosnąć */
+}
+
+.features {
+    list-style: none;
+    margin-bottom: 25px;
+}
+
+.features li {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.feat-icon {
+    color: var(--accent-color);
+}
+
+.btn-card {
+    display: block;
+    text-align: center;
+    padding: 12px;
+    background: transparent;
+    border: 1px solid rgba(14, 165, 233, 0.3);
+    color: var(--accent-color);
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    transition: 0.3s;
+}
+
+.btn-card:hover {
+    background-color: rgba(14, 165, 233, 0.1);
+    border-color: var(--accent-color);
+}
+
+/* --- STOPKA --- */
+.footer {
+    background-color: #0b0f17;
+    padding: 60px 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: 40px;
+}
+
+.footer-col h4 {
+    margin-bottom: 20px;
+    font-size: 1rem;
+}
+
+.footer-logo {
+    font-size: 2rem;
+    border: 1px solid var(--text-main);
+    display: inline-block;
+    padding: 5px 10px;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+}
+
+.brand-col p {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+}
+
+.socials a {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgba(255,255,255,0.1);
+    text-align: center;
+    line-height: 30px;
+    color: var(--text-main);
+    text-decoration: none;
+    margin-right: 10px;
+    font-size: 0.8rem;
+}
+
+.footer-col ul {
+    list-style: none;
+}
+
+.footer-col ul li {
+    margin-bottom: 10px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.footer-col ul li a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-col ul li a:hover {
+    color: var(--accent-color);
+}
+
+.contact-col ul li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Responsywność dla mniejszych ekranów (np. tablety i telefony) */
+@media (max-width: 1024px) {
+    .courses-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .footer-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .courses-grid {
+        grid-template-columns: 1fr;
+    }
+    .footer-container {
+        grid-template-columns: 1fr;
+    }
+}
