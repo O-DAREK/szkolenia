@@ -19,5 +19,7 @@ jobs:
           key: ${{ secrets.PROD_SSH_KEY }}
           port: 22
           script: |
+            set -x
             cd /var/www/clients/client1/web17/web
-            git pull origin main
+            git config --global --add safe.directory /var/www/clients/client1/web17/web
+            git pull origin main 2>&1
