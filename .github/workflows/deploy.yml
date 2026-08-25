@@ -19,7 +19,7 @@ jobs:
           key: ${{ secrets.PROD_SSH_KEY }}
           port: 22
           script: |
-            set -x
             cd /var/www/clients/client1/web17/web
-            git config --global --add safe.directory /var/www/clients/client1/web17/web
-            git pull origin main 2>&1
+            export GIT_SSH_COMMAND="ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no"
+            git pull origin main > deploy_log.txt 2>&1 || true
+            cat deploy_log.txt
