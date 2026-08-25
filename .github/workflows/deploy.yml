@@ -1,4 +1,4 @@
-name: Deploy web1
+name: Deploy web17
 
 on:
   push:
@@ -7,18 +7,17 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-
-      - name: Logujemy się i odpalamy skrypt
+      - name: Deploy via SSH to web17
         uses: appleboy/ssh-action@v1.0.0
         with:
           host: ${{ secrets.PROD_HOST }}
-          username: oskroba
+          username: web17
           key: ${{ secrets.PROD_SSH_KEY }}
           port: 22
           script: |
-            echo "Finalizing deployment"
-            bash ~/bin/update_web17.sh ~/web17_temp7
+            cd /var/www/clients/client1/web17/web
+            git pull origin main
