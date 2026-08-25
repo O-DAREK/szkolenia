@@ -18,13 +18,22 @@ jobs:
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan -p 22 ${{ secrets.PROD_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Wykonanie pull z obejsciem Jailkit
+      - name: Utworzenie i wyslanie skryptu wdrazajacego
         run: |
-          ssh -T -i ~/.ssh/id_ed25519 web17@${{ secrets.PROD_HOST }} << 'REMOTESSHEOF'
-          # Wymuszenie zmiennych srodowiskowych dla ISPConfig Jailkit
+          cat << 'SCRIPT' > deploy.sh
+          #!/bin/bash
+          set -x
           export HOME=/home/web17
-          export PATH=/usr/local/bin:/usr/bin:/bin:$PATH
-          
+          export GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no"
           cd ~/web
+          git config --global --add safe.directory ~/web
+          git config --global --add safe.directory /var/www/clients/client1/web17/web
           git pull origin main 2>&1
-          REMOTESSHEOF
+          SCRIPT
+          
+          chmod +x deploy.sh
+          scp -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no deploy.sh web17@${{ secrets.PROD_HOST }}:~/deploy.sh
+
+      - name: Uruchomienie skryptu na serwerze
+        run: |
+          ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no web17@${{ secrets.PROD_HOST }} "bash ~/deploy.sh"
