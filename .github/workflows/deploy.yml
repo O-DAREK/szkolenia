@@ -18,10 +18,13 @@ jobs:
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan -p 22 ${{ secrets.PROD_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Wykonanie pull ze sztucznym terminalem
+      - name: Wykonanie pull z obejsciem Jailkit
         run: |
           ssh -T -i ~/.ssh/id_ed25519 web17@${{ secrets.PROD_HOST }} << 'REMOTESSHEOF'
-          set -x
-          cd web
-          git pull origin main
+          # Wymuszenie zmiennych srodowiskowych dla ISPConfig Jailkit
+          export HOME=/home/web17
+          export PATH=/usr/local/bin:/usr/bin:/bin:$PATH
+          
+          cd ~/web
+          git pull origin main 2>&1
           REMOTESSHEOF
