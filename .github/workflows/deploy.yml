@@ -20,7 +20,8 @@ jobs:
 
       - name: Wykonanie pull ze sztucznym terminalem
         run: |
-          ssh -i ~/.ssh/id_ed25519 web17@${{ secrets.PROD_HOST }} << 'REMOTESSHEOF'
+          ssh -T -i ~/.ssh/id_ed25519 web17@${{ secrets.PROD_HOST }} << 'REMOTESSHEOF'
+          set -x
           cd web
           git pull origin main
           REMOTESSHEOF
