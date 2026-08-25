@@ -21,6 +21,14 @@ jobs:
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan -p 22 ${{ secrets.PROD_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Wrzucenie plikow na serwer przez rsync
+      - name: Instalacja lftp
+        run: sudo apt-get update && sudo apt-get install -y lftp
+
+      - name: Wrzucenie plikow na serwer przez protokol SFTP (lftp)
         run: |
-          rsync -avz --exclude '.git/' --exclude '.github/' ./ web17@${{ secrets.PROD_HOST }}:~/web/
+          lftp -c "
+          set sftp:auto-confirm yes
+          set sftp:connect-program 'ssh -a -x -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no'
+          open sftp://web17@${{ secrets.PROD_HOST }}
+          mirror -R --verbose --exclude .git/ --exclude .github/ ./ web/
+          "
