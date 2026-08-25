@@ -19,7 +19,12 @@ jobs:
           key: ${{ secrets.PROD_SSH_KEY }}
           port: 22
           script: |
-            cd /var/www/clients/client1/web17/web
-            export GIT_SSH_COMMAND="ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no"
-            git pull origin main > deploy_log.txt 2>&1 || true
-            cat deploy_log.txt
+            {
+              echo "=== Rozpoczecie wdrazania ==="
+              pwd
+              cd ~/web
+              export GIT_SSH_COMMAND="ssh -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no"
+              git pull origin main
+              echo "=== Zakonczenie wdrazania ==="
+            } > ~/deploy_debug.log 2>&1 || true
+            cat ~/deploy_debug.log
