@@ -7,34 +7,51 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy:
+  web-deploy:
+    name: 🎉 Deploy
     runs-on: ubuntu-latest
-
     steps:
-      - name: Pobranie kodu
+      - name: 🚚 Get latest code
         uses: actions/checkout@v4
 
-      - name: Konfiguracja profilu SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.PROD_SSH_KEY }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
+      - name: 📂 Sync files to ISPConfig
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.PROD_HOST }}
+          username: ${{ secrets.ISP_USER }}
+          password: ${{ secrets.ISP_PASSWORD }}
+          server-dir: /web/
+
+
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Pobranie kodu
+#         uses: actions/checkout@v4
+
+#       - name: Konfiguracja profilu SSH
+#         run: |
+#           mkdir -p ~/.ssh
+#           echo "${{ secrets.PROD_SSH_KEY }}" > ~/.ssh/id_ed25519
+#           chmod 600 ~/.ssh/id_ed25519
           
-          cat << 'SSHCFG' > ~/.ssh/config
-          Host docelowy_serwer
-            HostName ${{ secrets.PROD_HOST }}
-            User web17
-            IdentityFile ~/.ssh/id_ed25519
-            StrictHostKeyChecking no
-          SSHCFG
-          chmod 600 ~/.ssh/config
+#           cat << 'SSHCFG' > ~/.ssh/config
+#           Host docelowy_serwer
+#             HostName ${{ secrets.PROD_HOST }}
+#             User web17
+#             IdentityFile ~/.ssh/id_ed25519
+#             StrictHostKeyChecking no
+#           SSHCFG
+#           chmod 600 ~/.ssh/config
 
-      - name: Instalacja lftp
-        run: sudo apt-get update && sudo apt-get install -y lftp
+#       - name: Instalacja lftp
+#         run: sudo apt-get update && sudo apt-get install -y lftp
 
-      - name: Wrzucenie plikow na serwer
-        run: |
-          lftp -c "
-          open sftp://docelowy_serwer
-          mirror -R --verbose --exclude .git/ --exclude .github/ ./ web/
-          "
+#       - name: Wrzucenie plikow na serwer
+#         run: |
+#           lftp -c "
+#           open sftp://docelowy_serwer
+#           mirror -R --verbose --exclude .git/ --exclude .github/ ./ web/
+#           "
