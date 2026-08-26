@@ -17,4 +17,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://dag.example/sitemap.xml
+Sitemap: https://soc.dag.pl/sitemap.xml
