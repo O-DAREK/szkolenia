@@ -60,7 +60,7 @@ export default function Home() {
       <main>
         {/* SEKCJA HERO */}
         <section className="hero-grid px-5 py-20 text-center md:py-28">
-          <h1 className="mx-auto max-w-4xl text-3xl font-bold uppercase leading-snug tracking-wide text-accent md:text-4xl">
+          <h1 className="mx-auto max-w-4xl font-display text-3xl font-bold uppercase leading-snug tracking-wide text-accent md:text-4xl">
             Wzmacniaj cyfrową obronę swojej
             <br />
             firmy z kursami DAG

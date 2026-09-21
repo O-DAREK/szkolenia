@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 const faq: { q: string; a: string }[] = [
   {
     q: "Czy szkolenia są płatne?",
-    a: "Kurs podstawowy oraz kurs średniozaawansowany (IT Track) są bezpłatne. Szkolenie dla pracowników firm oraz kursy zaawansowane (Incident Response i Threat Hunting) są płatne. Szczegóły znajdziesz na stronie każdego kursu.",
+    a: "Kurs podstawowy jest bezpłatny. Szkolenie dla pracowników firm, kurs średniozaawansowany oraz kurs zaawansowany są płatne — część z możliwością dofinansowania lub wyceny indywidualnej. Szczegóły znajdziesz na stronie każdego kursu.",
   },
   {
     q: "Czy po kursie otrzymam certyfikat?",
@@ -26,11 +26,11 @@ const faq: { q: string; a: string }[] = [
   },
   {
     q: "W jakiej formie odbywają się szkolenia?",
-    a: "Zajęcia prowadzimy online — na żywo przez Zoom lub w formie e-learningu (nagrania wideo + materiały PDF). Szkolenia stacjonarne realizujemy na życzenie klienta firmowego.",
+    a: "Zajęcia prowadzimy online — na żywo przez Zoom. Szkolenia stacjonarne realizujemy na życzenie klienta firmowego.",
   },
   {
     q: "Czy potrzebuję wiedzy technicznej, żeby wziąć udział?",
-    a: "To zależy od kursu. Szkolenie dla firm i kurs podstawowy nie mają wymagań wstępnych — wystarczy codzienne korzystanie z komputera. Kurs średniozaawansowany i kursy zaawansowane zakładają doświadczenie w IT (administracja, sieci, systemy).",
+    a: "To zależy od kursu. Szkolenie dla firm i kurs podstawowy nie mają wymagań wstępnych — wystarczy codzienne korzystanie z komputera. Kurs średniozaawansowany i kursy zaawansowane zakładają doświadczenie w IT (administracja, sieci, systemy) lub wcześniejsze przejście kursu podstawowego.",
   },
   {
     q: "Jak wygląda rezygnacja z udziału?",

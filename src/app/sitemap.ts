@@ -7,7 +7,14 @@ const BASE = "https://soc.dag.pl";
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticPaths = ["/", "/o-nas/", "/cennik/", "/faq/", "/kontakt/"];
+  const staticPaths = [
+    "/",
+    "/o-nas/",
+    "/cennik/",
+    "/faq/",
+    "/kontakt/",
+    "/polityka-cookies/",
+  ];
   const coursePaths = courses.map((c) => `/kursy/${c.slug}/`);
 
   return [...staticPaths, ...coursePaths].map((path) => ({

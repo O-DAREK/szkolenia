@@ -5,6 +5,8 @@ import { courses, getCourse } from "@/data/courses";
 import { CourseIcon } from "@/components/CourseIcon";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { ContactForm } from "@/components/ContactForm";
+import { EnrollmentForm } from "@/components/EnrollmentForm";
 
 // Statyczny eksport: wygeneruj podstronę dla każdego kursu.
 export function generateStaticParams() {
@@ -152,24 +154,34 @@ export default async function CoursePage({
             </ul>
           </section>
 
-          {/* CTA */}
-          <section className="rounded-lg border border-accent/30 bg-card p-8 text-center">
-            <h2 className="text-xl font-semibold">Chcesz zapisać się na ten kurs?</h2>
-            <p className="mx-auto mt-2 max-w-xl text-sm text-muted">
-              Skontaktuj się z nami — dobierzemy termin i formę szkolenia do
-              Twoich potrzeb.
-            </p>
-            <div className="mt-6 flex flex-wrap justify-center gap-3">
-              <a
-                href="mailto:kontakt@soc.dag.pl"
-                className="rounded border border-accent bg-accent px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-dark"
-              >
-                BEZPŁATNA KONSULTACJA
-              </a>
-              <Link
-                href="/#kursy"
-                className="rounded border border-muted px-6 py-3 text-sm font-semibold text-main transition-colors hover:border-accent hover:text-accent"
-              >
+          {/* CTA — formularz zapisu (kursy) lub kontaktowy (szkolenie dla firm) */}
+          <section id="zapis" className="rounded-lg border border-accent/30 bg-card p-6 md:p-8">
+            {course.slug === "szkolenie-dla-firm" ? (
+              <>
+                <h2 className="text-xl font-semibold">
+                  Zainteresowany szkoleniem dla zespołu?
+                </h2>
+                <p className="mt-2 max-w-xl text-sm text-muted">
+                  Napisz do nas — przygotujemy ofertę dopasowaną do Twojej firmy.
+                </p>
+                <div className="mt-6">
+                  <ContactForm />
+                </div>
+              </>
+            ) : (
+              <>
+                <h2 className="text-xl font-semibold">Zapisz się na ten kurs</h2>
+                <p className="mt-2 max-w-xl text-sm text-muted">
+                  Wypełnij formularz — potwierdzimy zapis i szczegóły terminu
+                  e-mailem.
+                </p>
+                <div className="mt-6">
+                  <EnrollmentForm defaultCourse={course.title} />
+                </div>
+              </>
+            )}
+            <div className="mt-6">
+              <Link href="/#kursy" className="text-sm text-accent hover:underline">
                 &larr; Wszystkie kursy
               </Link>
             </div>

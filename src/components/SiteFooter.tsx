@@ -14,18 +14,13 @@ export function SiteFooter() {
           </p>
           <div className="flex gap-2.5">
             <a
-              href="#"
+              href="https://www.linkedin.com/company/dag-sc/"
+              target="_blank"
+              rel="noopener noreferrer"
               aria-label="LinkedIn"
-              className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-xs text-main"
+              className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-xs text-main transition-colors hover:bg-accent hover:text-white"
             >
               in
-            </a>
-            <a
-              href="#"
-              aria-label="X"
-              className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-xs text-main"
-            >
-              X
             </a>
           </div>
         </div>
@@ -40,6 +35,7 @@ export function SiteFooter() {
               { label: "O nas", href: "/o-nas/" },
               { label: "FAQ", href: "/faq/" },
               { label: "Kontakt", href: "/kontakt/" },
+              { label: "Polityka cookies", href: "/polityka-cookies/" },
             ].map((link) => (
               <li key={link.label}>
                 <Link href={link.href} className="transition-colors hover:text-accent">
@@ -62,9 +58,9 @@ export function SiteFooter() {
               "Business Email Protection",
             ].map((link) => (
               <li key={link}>
-                <a href="#" className="transition-colors hover:text-accent">
+                <Link href="/kontakt/" className="transition-colors hover:text-accent">
                   {link}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
