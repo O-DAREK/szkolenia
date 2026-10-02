@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { FormConsents } from "@/components/FormConsents";
 
 // Endpoint formularza. Ustaw w .env.local:
 //   NEXT_PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/twoj-id
@@ -22,7 +23,7 @@ export function ContactForm() {
     if (!ENDPOINT) {
       const subject = encodeURIComponent("Zapytanie ze strony SOC.DAG");
       const body = encodeURIComponent(
-        `Imię i nazwisko: ${data.get("name")}\nE-mail: ${data.get("email")}\n\n${data.get("message")}`,
+        `Imię i nazwisko: ${data.get("name")}\nE-mail: ${data.get("email")}\n\n${data.get("message")}\n\nZgoda na przetwarzanie danych (RODO): ${data.get("consent_processing") ? "tak" : "nie"}\nZgoda marketingowa: ${data.get("consent_marketing") ? "tak" : "nie"}`,
       );
       window.location.href = `mailto:kontakt@soc.dag.pl?subject=${subject}&body=${body}`;
       return;
@@ -103,6 +104,8 @@ export function ContactForm() {
         />
       </div>
 
+      <FormConsents />
+
       {status === "error" && (
         <p role="alert" className="text-sm text-red-400">
           {error}
@@ -116,10 +119,6 @@ export function ContactForm() {
       >
         {status === "submitting" ? "WYSYŁANIE…" : "WYŚLIJ WIADOMOŚĆ"}
       </button>
-      <p className="text-xs text-muted">
-        Wysyłając formularz akceptujesz przetwarzanie danych w celu obsługi
-        zapytania (RODO). Administrator: DAG s.c.
-      </p>
     </form>
   );
 }

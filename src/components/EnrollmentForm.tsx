@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { courses } from "@/data/courses";
+import { FormConsents } from "@/components/FormConsents";
 
 const ENDPOINT = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT ?? "";
 
@@ -33,7 +34,7 @@ export function EnrollmentForm({ defaultCourse }: { defaultCourse?: string }) {
     if (!ENDPOINT) {
       const subject = encodeURIComponent("Zapis na kurs SOC.DAG");
       const body = encodeURIComponent(
-        `Imię i nazwisko: ${data.get("name")}\nE-mail: ${data.get("email")}\nKurs: ${data.get("course")}\nTermin: ${data.get("term")}\n\n${data.get("message") ?? ""}`,
+        `Imię i nazwisko: ${data.get("name")}\nE-mail: ${data.get("email")}\nKurs: ${data.get("course")}\nTermin: ${data.get("term")}\n\n${data.get("message") ?? ""}\n\nZgoda na przetwarzanie danych (RODO): ${data.get("consent_processing") ? "tak" : "nie"}\nZgoda marketingowa: ${data.get("consent_marketing") ? "tak" : "nie"}`,
       );
       window.location.href = `mailto:kontakt@soc.dag.pl?subject=${subject}&body=${body}`;
       return;
@@ -133,6 +134,8 @@ export function EnrollmentForm({ defaultCourse }: { defaultCourse?: string }) {
         <textarea id="message" name="message" rows={4} className={inputClass} />
       </div>
 
+      <FormConsents />
+
       {status === "error" && (
         <p role="alert" className="text-sm text-red-400">
           {error}
@@ -146,10 +149,6 @@ export function EnrollmentForm({ defaultCourse }: { defaultCourse?: string }) {
       >
         {status === "submitting" ? "WYSYŁANIE…" : "ZAPISZ SIĘ NA KURS"}
       </button>
-      <p className="text-xs text-muted">
-        Wysyłając formularz akceptujesz przetwarzanie danych w celu obsługi
-        zgłoszenia (RODO). Administrator: DAG s.c.
-      </p>
     </form>
   );
 }

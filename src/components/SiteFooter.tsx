@@ -35,6 +35,7 @@ export function SiteFooter() {
               { label: "O nas", href: "/o-nas/" },
               { label: "FAQ", href: "/faq/" },
               { label: "Kontakt", href: "/kontakt/" },
+              { label: "Regulamin", href: "/regulamin/" },
               { label: "Polityka cookies", href: "/polityka-cookies/" },
             ].map((link) => (
               <li key={link.label}>

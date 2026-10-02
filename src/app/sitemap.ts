@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/cennik/",
     "/faq/",
     "/kontakt/",
+    "/regulamin/",
     "/polityka-cookies/",
   ];
   const coursePaths = courses.map((c) => `/kursy/${c.slug}/`);
