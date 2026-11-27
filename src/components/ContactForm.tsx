@@ -2,11 +2,8 @@
 
 import { useState } from "react";
 import { FormConsents } from "@/components/FormConsents";
+import { sendTo4D } from "@/lib/send4d";
 
-// Endpoint formularza. Ustaw w .env.local:
-//   NEXT_PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/twoj-id
-// Zmienne NEXT_PUBLIC_* są wstrzykiwane do buildu (działa ze statycznym eksportem).
-const ENDPOINT = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT ?? "";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
@@ -17,36 +14,15 @@ export function ContactForm() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
-    const data = new FormData(form);
-
-    // Fallback, gdy endpoint nie jest skonfigurowany — otwórz klienta poczty.
-    if (!ENDPOINT) {
-      const subject = encodeURIComponent("Zapytanie ze strony SOC.DAG");
-      const body = encodeURIComponent(
-        `Imię i nazwisko: ${data.get("name")}\nE-mail: ${data.get("email")}\n\n${data.get("message")}\n\nZgoda na przetwarzanie danych (RODO): ${data.get("consent_processing") ? "tak" : "nie"}\nZgoda marketingowa: ${data.get("consent_marketing") ? "tak" : "nie"}`,
-      );
-      window.location.href = `mailto:kontakt@soc.dag.pl?subject=${subject}&body=${body}`;
-      return;
-    }
-
     setStatus("submitting");
     setError("");
     try {
-      const res = await fetch(ENDPOINT, {
-        method: "POST",
-        body: data,
-        headers: { Accept: "application/json" },
-      });
-      if (res.ok) {
-        setStatus("success");
-        form.reset();
-      } else {
-        const json = await res.json().catch(() => null);
-        setError(json?.errors?.[0]?.message ?? "Nie udało się wysłać wiadomości.");
-        setStatus("error");
-      }
+      // Zgłoszenie trafia prosto do iCRM (4D) — zob. src/lib/send4d.ts
+      await sendTo4D(form);
+      setStatus("success");
+      form.reset();
     } catch {
-      setError("Błąd połączenia. Spróbuj ponownie lub napisz na kontakt@soc.dag.pl.");
+      setError("Nie udało się wysłać wiadomości. Spróbuj ponownie albo zadzwoń: 22 100 77 77.");
       setStatus("error");
     }
   }
@@ -67,6 +43,15 @@ export function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
+      <input type="hidden" name="_form" value="Kontakt" />
+      <input
+        type="text"
+        name="_gotcha"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="hidden"
+      />
       <div>
         <label htmlFor="name" className="mb-1 block text-sm text-muted">
           Imię i nazwisko

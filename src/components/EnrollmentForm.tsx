@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { courses } from "@/data/courses";
 import { FormConsents } from "@/components/FormConsents";
+import { sendTo4D } from "@/lib/send4d";
 
-const ENDPOINT = process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT ?? "";
 
 // Terminy do wyboru — placeholdery, do uzupełnienia realnymi datami.
 const TERMS = [
@@ -29,35 +29,15 @@ export function EnrollmentForm({ defaultCourse }: { defaultCourse?: string }) {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
-    const data = new FormData(form);
-
-    if (!ENDPOINT) {
-      const subject = encodeURIComponent("Zapis na kurs SOC.DAG");
-      const body = encodeURIComponent(
-        `Imię i nazwisko: ${data.get("name")}\nE-mail: ${data.get("email")}\nKurs: ${data.get("course")}\nTermin: ${data.get("term")}\n\n${data.get("message") ?? ""}\n\nZgoda na przetwarzanie danych (RODO): ${data.get("consent_processing") ? "tak" : "nie"}\nZgoda marketingowa: ${data.get("consent_marketing") ? "tak" : "nie"}`,
-      );
-      window.location.href = `mailto:kontakt@soc.dag.pl?subject=${subject}&body=${body}`;
-      return;
-    }
-
     setStatus("submitting");
     setError("");
     try {
-      const res = await fetch(ENDPOINT, {
-        method: "POST",
-        body: data,
-        headers: { Accept: "application/json" },
-      });
-      if (res.ok) {
-        setStatus("success");
-        form.reset();
-      } else {
-        const json = await res.json().catch(() => null);
-        setError(json?.errors?.[0]?.message ?? "Nie udało się wysłać zgłoszenia.");
-        setStatus("error");
-      }
+      // Zgłoszenie trafia prosto do iCRM (4D) — zob. src/lib/send4d.ts
+      await sendTo4D(form);
+      setStatus("success");
+      form.reset();
     } catch {
-      setError("Błąd połączenia. Spróbuj ponownie lub napisz na kontakt@soc.dag.pl.");
+      setError("Nie udało się wysłać zgłoszenia. Spróbuj ponownie albo zadzwoń: 22 100 77 77.");
       setStatus("error");
     }
   }
@@ -79,6 +59,15 @@ export function EnrollmentForm({ defaultCourse }: { defaultCourse?: string }) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4 text-left">
+      <input type="hidden" name="_form" value="Zapis na kurs" />
+      <input
+        type="text"
+        name="_gotcha"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="hidden"
+      />
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="name" className="mb-1 block text-sm text-muted">
