@@ -52,7 +52,7 @@ export default async function CoursePage({
   };
 
   const meta = [
-    { label: "Koszt", value: course.cost },
+    { label: "Koszt", value: course.price },
     { label: "Czas trwania", value: course.hours === "Threat Hunting" ? "Threat Hunting" : `~${course.hours}` },
     { label: "Format", value: course.format },
   ];
