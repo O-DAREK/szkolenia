@@ -64,7 +64,13 @@ export default async function CoursePage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <SiteHeader />
+      <SiteHeader
+        cta={
+          course.slug === "szkolenie-dla-firm"
+            ? { label: "FORMULARZ KONTAKTOWY", href: "#zapis" }
+            : { label: "FORMULARZ ZAPISU", href: "#zapis" }
+        }
+      />
 
       <main className="mx-auto max-w-4xl px-6 py-12 md:px-10">
         {/* Okruszki */}
@@ -155,7 +161,7 @@ export default async function CoursePage({
           </section>
 
           {/* CTA — formularz zapisu (kursy) lub kontaktowy (szkolenie dla firm) */}
-          <section id="zapis" className="rounded-lg border border-accent/30 bg-card p-6 md:p-8">
+          <section id="zapis" className="scroll-mt-28 rounded-lg border border-accent/30 bg-card p-6 md:p-8">
             {course.slug === "szkolenie-dla-firm" ? (
               <>
                 <h2 className="text-xl font-semibold">

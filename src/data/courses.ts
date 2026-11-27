@@ -48,11 +48,11 @@ export const courses: Course[] = [
       "Twoje prawa i obowiązki — RODO i odpowiedzialność pracownika",
     ],
     outcomes: [
-      "Rozpoznajesz phishing, vishing i deepfake, zanim klikniesz lub przelejesz pieniądze.",
-      "Używasz menedżera haseł i weryfikacji dwuetapowej — i wiesz dlaczego to ważne.",
-      "Bezpiecznie pracujesz z e-mailem, chmurą i na pracy zdalnej.",
-      "Wiesz, co zrobić, gdy coś pójdzie źle: nie kasujesz, nie płacisz, zgłaszasz.",
-      "Rozumiesz swoje obowiązki wynikające z RODO.",
+      "Rozpoznawania phishingu, vishingu i deepfake, zanim klikniesz lub przelejesz pieniądze.",
+      "Używania menedżera haseł i weryfikacji dwuetapowej i tego, dlaczego to ważne.",
+      "Bezpiecznej pracy z e-mailem, chmurą i w pracy zdalnej.",
+      "Tego, co zrobić, gdy coś pójdzie źle.",
+      "Swoich obowiązków wynikających z RODO.",
     ],
   },
   {

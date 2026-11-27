@@ -14,7 +14,7 @@ export function SiteFooter() {
           </p>
           <div className="flex gap-2.5">
             <a
-              href="https://www.linkedin.com/company/dag-sc/"
+              href="https://www.linkedin.com/showcase/98615770/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
@@ -51,17 +51,21 @@ export function SiteFooter() {
           <h4 className="mb-5 text-base font-semibold">Nasze usługi</h4>
           <ul className="space-y-2.5 text-sm text-muted">
             {[
-              "Monitoring 24/7",
-              "Reakcja na incydenty",
-              "Threat Hunting",
-              "Zgodność z przepisami",
-              "System Hardening",
-              "Business Email Protection",
-            ].map((link) => (
-              <li key={link}>
-                <Link href="/kontakt/" className="transition-colors hover:text-accent">
-                  {link}
-                </Link>
+              { label: "Monitoring 24/7", slug: "monitoring" },
+              { label: "Reakcja na incydenty", slug: "incident-response" },
+              { label: "Threat Hunting", slug: "threat-hunting" },
+              { label: "Zgodność z przepisami", slug: "compliance" },
+              { label: "System Hardening", slug: "hardening" },
+              { label: "Business Email Protection", slug: "email-protection" },
+            ].map((s) => (
+              <li key={s.slug}>
+                {/* Usługi SOC są opisane na soc.dag.pl */}
+                <a
+                  href={`https://soc.dag.pl/services/${s.slug}`}
+                  className="transition-colors hover:text-accent"
+                >
+                  {s.label}
+                </a>
               </li>
             ))}
           </ul>
