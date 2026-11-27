@@ -12,11 +12,15 @@ export function SiteHeader({ cta = DEFAULT_CTA }: { cta?: Cta }) {
   return (
     <header className="sticky top-0 z-50 border-b border-white/5 bg-bgdark/95 backdrop-blur">
       <div className="mx-auto flex max-w-[1400px] flex-wrap items-center justify-between gap-4 px-6 py-5 md:px-10">
-        <Link href="/" className="flex items-center gap-2">
-          <strong className="text-2xl tracking-wide">SOC.DAG</strong>
-          <span className="text-sm font-light text-muted">
-            Centrum Bezpieczeństwa
-          </span>
+        <Link href="/" className="flex items-center" aria-label="szkolenia.dag.pl – strona główna">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/logo-szkolenia-dag-jasne.png"
+            alt="SZKOLENIA.DAG"
+            width={920}
+            height={120}
+            className="h-7 w-auto md:h-9"
+          />
         </Link>
         <nav aria-label="Główna nawigacja" className="flex items-center gap-2 text-sm">
           <Link href="/#kursy" className="mx-3 text-muted transition-colors hover:text-accent">

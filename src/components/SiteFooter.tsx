@@ -5,9 +5,14 @@ export function SiteFooter() {
     <footer id="kontakt" className="border-t border-white/5 bg-footer px-6 py-16 md:px-10">
       <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1.5fr]">
         <div>
-          <p className="mb-4 inline-block border border-main px-2.5 py-1.5 text-2xl font-bold tracking-widest">
-            DAG
-          </p>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/logo-szkolenia-dag-jasne.png"
+            alt="SZKOLENIA.DAG"
+            width={920}
+            height={120}
+            className="mb-4 h-8 w-auto"
+          />
           <p className="mb-5 text-sm text-muted">
             Ochrona na najwyższym poziomie dla małych i średnich firm. Całodobowe
             monitorowanie, wykrywanie zagrożeń i reagowanie na incydenty.
