@@ -7,7 +7,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 export const metadata: Metadata = {
   title: "Cennik",
   description:
-    "Cennik kursów i szkoleń SOC.DAG (ceny netto). Kurs podstawowy bezpłatny, kurs średniozaawansowany 1 800 zł, szkolenie dla pracowników 250 zł za osobę, kurs Incident Response w BUR od 4 200 zł z dofinansowaniem 50–80%. Szkolenia z AI: e-learning 149 zł za osobę, szkolenia zamknięte od 2 200 zł.",
+    "Cennik kursów i szkoleń SOC.DAG (ceny netto). Kurs podstawowy bezpłatny, kurs średniozaawansowany 1 800 zł, szkolenie dla pracowników 250 zł za osobę, kurs Incident Response online 3 500 zł (grupa do 8 osób, w BUR z dofinansowaniem 50–80%). Szkolenia z AI: e-learning 149 zł za osobę, szkolenia zamknięte od 2 200 zł.",
   alternates: { canonical: "/cennik/" },
 };
 
@@ -64,7 +64,7 @@ export default function CennikPage() {
                       className={
                         c.cost === "Bezpłatny"
                           ? "font-semibold text-accent"
-                          : "text-main"
+                          : "font-semibold text-price"
                       }
                     >
                       {c.price}
@@ -95,13 +95,20 @@ export default function CennikPage() {
             dofinansowaniem ze środków UE na poziomie{" "}
             <span className="text-main">50–80%</span> wartości netto.
           </p>
+          <p className="mt-2 text-sm text-muted">
+            Nazwa usługi w BUR:{" "}
+            <span className="text-main">
+              Cyberbezpieczeństwo – poziom zaawansowany (kurs online).
+              Reagowanie na Incydenty Bezpieczeństwa w praktyce.
+            </span>
+          </p>
           <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div className="rounded-lg border border-white/10 p-5">
               <p className="text-xs uppercase tracking-wide text-muted">
                 Wersja online
               </p>
               <p className="mt-1 text-2xl font-bold">
-                4 200 zł<span className="text-base font-normal text-muted"> netto / os.</span>
+                <span className="text-price">3 500 zł</span><span className="text-base font-normal text-muted"> netto / os.</span>
               </p>
             </div>
             <div className="rounded-lg border border-white/10 p-5">
@@ -109,12 +116,13 @@ export default function CennikPage() {
                 Wersja stacjonarna
               </p>
               <p className="mt-1 text-2xl font-bold">
-                5 200 zł<span className="text-base font-normal text-muted"> netto / os.</span>
+                <span className="text-price">5 200 zł</span><span className="text-base font-normal text-muted"> netto / os.</span>
               </p>
             </div>
           </div>
           <p className="mt-4 text-sm text-muted">
-            Cena wersji stacjonarnej obejmuje catering i salę. Poziom
+            Wersja online: grupa do 8 osób. Cena wersji stacjonarnej obejmuje
+            catering i salę. Poziom
             dofinansowania zależy od operatora regionalnego, wielkości firmy i
             statusu uczestnika.
           </p>
@@ -145,7 +153,7 @@ export default function CennikPage() {
                     {r.name}
                   </th>
                   <td className="py-4 pr-4 text-muted">{r.form}</td>
-                  <td className="py-4 text-main">{r.price}</td>
+                  <td className="py-4 font-semibold text-price">{r.price}</td>
                 </tr>
               ))}
             </tbody>
@@ -164,7 +172,7 @@ export default function CennikPage() {
           <p className="mb-3 text-muted">
             <span className="text-main">Szkolenie z cyberbezpieczeństwa dla
             pracowników</span> (ok. 2 h, online lub u Was w firmie):{" "}
-            <span className="font-semibold text-main">250 zł netto za osobę</span>,
+            <span className="font-semibold text-price">250 zł netto za osobę</span>,
             grupa do 15 osób.
           </p>
           <p className="text-muted">

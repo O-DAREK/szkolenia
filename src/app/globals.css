@@ -10,10 +10,37 @@
 
 /* Tło sekcji hero — siatka punktów jak na makiecie (docs/projekt-graficzny-wytyczne.jpg) */
 .hero-grid {
-  background-color: #0b1220;
+  background-color: #0b0d24;
   background-image:
-    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(14, 165, 233, 0.12), transparent 70%),
-    radial-gradient(circle, rgba(148, 163, 184, 0.25) 1px, transparent 1px);
-  background-size: 100% 100%, 26px 26px;
-  background-position: center top, center;
+    radial-gradient(ellipse 60% 70% at 25% 0%, rgba(34, 211, 238, 0.22), transparent 70%),
+    radial-gradient(ellipse 60% 70% at 80% 10%, rgba(168, 85, 247, 0.25), transparent 70%),
+    radial-gradient(circle, rgba(165, 180, 252, 0.22) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 26px 26px;
+  background-position: center top, center top, center;
+}
+
+/* Tekst w gradiencie cyjan → fiolet → róż (nagłówek strony głównej) */
+.text-gradient {
+  background-image: linear-gradient(90deg, #22d3ee, #a855f7 55%, #f472b6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Przyciski główne (klasa bg-accent w nagłówku, formularzach, cookies, CTA):
+   gradient cyjan → fiolet i ciemny tekst dla kontrastu. Reguła stoi po
+   @tailwind utilities, więc nadpisuje text-white i kolor tła. */
+.bg-accent {
+  background-image: linear-gradient(90deg, #22d3ee, #a855f7);
+  border-color: transparent !important;
+  color: #0d1029 !important;
+}
+.bg-accent:hover {
+  filter: brightness(1.12);
+  box-shadow: 0 0 18px rgba(168, 85, 247, 0.45);
+}
+
+/* Delikatna poświata kart przy najechaniu */
+.card-glow:hover {
+  box-shadow: 0 10px 30px -10px rgba(168, 85, 247, 0.45), 0 0 0 1px rgba(34, 211, 238, 0.5);
 }

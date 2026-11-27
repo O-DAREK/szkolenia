@@ -131,7 +131,7 @@ export const courses: Course[] = [
     title: "Kurs zaawansowany",
     hours: "24h",
     cost: "Płatny",
-    price: "od 4 200 zł netto / os.",
+    price: "od 3 500 zł netto / os.",
     format: "Online (teoria + case studies + ćwiczenia praktyczne)",
     audienceShort:
       "Dla: analityków SOC i specjalistów IT po poziomie podstawowym/średnim.",

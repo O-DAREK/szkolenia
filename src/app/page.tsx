@@ -47,6 +47,14 @@ const AimIcon = () => (
   </svg>
 );
 
+// Każdy kurs ma własny kolor ikony
+const iconColor: Record<string, string> = {
+  shield: "text-accent",
+  key: "text-accent2",
+  link: "text-pink",
+  target: "text-price",
+};
+
 export default function Home() {
   return (
     <>
@@ -60,7 +68,7 @@ export default function Home() {
       <main>
         {/* SEKCJA HERO */}
         <section className="hero-grid px-5 py-20 text-center md:py-28">
-          <h1 className="mx-auto max-w-4xl font-display text-3xl font-bold uppercase leading-snug tracking-wide text-accent md:text-4xl">
+          <h1 className="mx-auto max-w-4xl font-display text-3xl font-bold uppercase leading-snug tracking-wide text-gradient md:text-4xl">
             Wzmacniaj cyfrową obronę swojej
             <br />
             firmy z kursami DAG
@@ -74,9 +82,9 @@ export default function Home() {
             {courses.map((c) => (
               <article
                 key={c.slug}
-                className="flex flex-col rounded-lg border border-white/5 bg-card p-7 transition-all duration-300 hover:-translate-y-1.5 hover:border-accent"
+                className="card-glow flex flex-col rounded-lg border border-white/5 bg-card p-7 transition-all duration-300 hover:-translate-y-1.5 hover:border-accent"
               >
-                <div className="mb-5 flex justify-center text-accent">
+                <div className={`mb-5 flex justify-center ${iconColor[c.icon]}`}>
                   <CourseIcon name={c.icon} className="h-11 w-11" />
                 </div>
                 <h3 className="mb-4 text-center text-lg font-semibold">
